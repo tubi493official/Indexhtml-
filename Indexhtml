@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera & Mic Permission</title>
+</head>
+<body>
+  <h2>Camera & Microphone Test</h2>
+
+  <button onclick="startCamera()">Allow Camera & Mic</button>
+
+  <br><br>
+
+  <video id="video" autoplay playsinline
+         style="width:100%;max-width:500px;"></video>
+
+  <p id="status">Camera and microphone are OFF.</p>
+
+  <script>
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true
+        });
+
+        document.getElementById("video").srcObject = stream;
+        document.getElementById("status").textContent =
+          "Camera and microphone are ON.";
+      } catch (error) {
+        document.getElementById("status").textContent =
+          "Permission denied or unavailable.";
+      }
+    }
+  </script>
+</body>
+</html>
